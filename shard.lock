@@ -12,13 +12,13 @@ shards:
     github: dukex/expect.cr
     commit: 17c31a0f42815cd914a630852bb2ee0da6a39dc0
 
+  granite_orm:
+    github: kemalyst/granite-orm
+    version: 0.6.2
+
   kemalyst:
     github: kemalyst/kemalyst
     version: 0.8.7
-
-  kemalyst-model:
-    github: kemalyst/kemalyst-model
-    version: 0.6.0
 
   kemalyst-spec:
     github: kemalyst/kemalyst-spec
