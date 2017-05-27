@@ -30,15 +30,6 @@ Kemalyst::Application.config do |config|
   # Session Handler requires that you change the `secret` in the config/session.cr
   # file.
 
-  # config.handlers = [
-  #   Kemalyst::Handler::Logger.instance,
-  #   Kemalyst::Handler::Error.instance,
-  #   Kemalyst::Handler::Static.instance,
-  #   Kemalyst::Handler::Session.instance,
-  #   Kemalyst::Handler::Flash.instance,
-  #   Kemalyst::Handler::Params.instance,
-  #   Kemalyst::Handler::Router.instance
-  # ]
   config.handlers.clear
   config.handlers << Crack::Handler::Logger.instance(config.logger)
   config.handlers << Crack::Handler::Error.instance

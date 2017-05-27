@@ -1,4 +1,5 @@
 require "../models/post"
+require "markdown"
 
 class HomeController < Kemalyst::Controller
   action Index do

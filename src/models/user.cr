@@ -1,7 +1,7 @@
-require "kemalyst-model/adapter/mysql"
+require "granite_orm/adapter/mysql"
 require "crypto/bcrypt/password"
 
-class User < Kemalyst::Model
+class User < Granite::ORM
   adapter mysql
 
   # id : Int64 primary key is created for you
