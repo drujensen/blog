@@ -1,4 +1,4 @@
-Crack::Handler::Session.config do |config|
+Kemalyst::Handler::Session.config do |config|
   # The cookie name to hold the session data
   config.key = "_blog.session"
   

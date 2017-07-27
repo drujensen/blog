@@ -12,7 +12,7 @@ describe UserController do
     User.clear
   end
 
-  describe UserController::Index do
+  describe "index" do
     it "renders all the users" do
       subject = create_subject
       get "/users"
@@ -20,7 +20,7 @@ describe UserController do
     end
   end
 
-  describe UserController::Show do
+  describe "show" do
     it "renders a single user" do
       subject = create_subject
       get "/users/#{subject.id}"
@@ -28,14 +28,14 @@ describe UserController do
     end
   end
 
-  describe UserController::New do
+  describe "new" do
     it "render new template" do
       get "/users/new"
       response.body.should contain "New User"
     end
   end
 
-  describe UserController::Create do
+  describe "create" do
     it "creates a user" do
       post "/users", body: "name=testing"
       subject_list = User.all
@@ -43,7 +43,7 @@ describe UserController do
     end
   end
 
-  describe UserController::Edit do
+  describe "edit" do
     it "renders edit template" do
       subject = create_subject
       get "/users/#{subject.id}/edit"
@@ -51,7 +51,7 @@ describe UserController do
     end
   end
 
-  describe UserController::Update do
+  describe "update" do
     it "updates a user" do
       subject = create_subject
       patch "/users/#{subject.id}", body: "name=test2"
@@ -60,7 +60,7 @@ describe UserController do
     end
   end
 
-  describe UserController::Delete do
+  describe "delete" do
     it "deletes a user" do
       subject = create_subject
       delete "/users/#{subject.id}"

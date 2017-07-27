@@ -2,11 +2,11 @@ require "../src/controllers/*"
 
 include Kemalyst::Handler
 
-get "/", home, index
+get "/", HomeController, :index
 
-get "/login", session, new
-post "/session", session, create
-get "/logout", session, delete
+get "/login", SessionController, :new
+post "/session", SessionController, :create
+get "/logout", SessionController, :delete
 
 resources Post
 resources User

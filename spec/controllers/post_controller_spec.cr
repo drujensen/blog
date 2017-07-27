@@ -12,7 +12,7 @@ describe PostController do
     Post.clear
   end
 
-  describe PostController::Index do
+  describe "index" do
     it "renders all the posts" do
       subject = create_subject
       get "/posts"
@@ -20,7 +20,7 @@ describe PostController do
     end
   end
 
-  describe PostController::Show do
+  describe "show" do
     it "renders a single post" do
       subject = create_subject
       get "/posts/#{subject.id}"
@@ -28,14 +28,14 @@ describe PostController do
     end
   end
 
-  describe PostController::New do
+  describe "new" do
     it "render new template" do
       get "/posts/new"
       response.body.should contain "New Post"
     end
   end
 
-  describe PostController::Create do
+  describe "create" do
     it "creates a post" do
       post "/posts", body: "title=testing"
       subject_list = Post.all
@@ -43,7 +43,7 @@ describe PostController do
     end
   end
 
-  describe PostController::Edit do
+  describe "edit" do
     it "renders edit template" do
       subject = create_subject
       get "/posts/#{subject.id}/edit"
@@ -51,7 +51,7 @@ describe PostController do
     end
   end
 
-  describe PostController::Update do
+  describe "update" do
     it "updates a post" do
       subject = create_subject
       patch "/posts/#{subject.id}", body: "title=test2"
@@ -60,7 +60,7 @@ describe PostController do
     end
   end
 
-  describe PostController::Delete do
+  describe "delete" do
     it "deletes a post" do
       subject = create_subject
       delete "/posts/#{subject.id}"

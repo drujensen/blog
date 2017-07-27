@@ -5,5 +5,4 @@
 /.crystal/
 /.shards/
 .env
-
-
+!shards.lock

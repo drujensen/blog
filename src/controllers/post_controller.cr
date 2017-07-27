@@ -1,67 +1,67 @@
 require "../models/post"
 
 class PostController < Kemalyst::Controller
-  action Index do
+  def index
     posts = Post.all("ORDER BY created_at DESC")
     html render("post/index.slang", "main.slang")
   end
 
-  action Show do
+  def show
     if post = Post.find params["id"]
       html render("post/show.slang", "main.slang")
     else
-      context.flash["warning"] = "Post with ID #{params["id"]} Not Found"
+      flash["warning"] = "Post with ID #{params["id"]} Not Found"
       redirect "/posts"
     end
   end
 
-  action New do
+  def new
     post = Post.new
     html render("post/new.slang", "main.slang")
   end
 
-  action Create do
+  def create
     post = Post.new(params.to_h.select(["title", "body", "published"]))
 
     if post.valid? && post.save
-      context.flash["success"] = "Created Post successfully."
+      flash["success"] = "Created Post successfully."
       redirect "/posts"
     else
-      context.flash["danger"] = "Could not create Post!"
+      flash["danger"] = "Could not create Post!"
       html render("post/new.slang", "main.slang")
     end
   end
 
-  action Edit do
+  def edit
     if post = Post.find params["id"]
       html render("post/edit.slang", "main.slang")
     else
-      context.flash["warning"] = "Post with ID #{params["id"]} Not Found"
+      flash["warning"] = "Post with ID #{params["id"]} Not Found"
       redirect "/posts"
     end
   end
 
-  action Update do
+  def update
     if post = Post.find(params["id"])
       post.set_attributes(params.to_h.select(["title", "body", "published"]))
       if post.valid? && post.save
-        context.flash["success"] = "Updated Post successfully."
+        flash["success"] = "Updated Post successfully."
         redirect "/posts"
       else
-        context.flash["danger"] = "Could not update Post!"
+        flash["danger"] = "Could not update Post!"
         html render("post/edit.slang", "main.slang")
       end
     else
-      context.flash["warning"] = "Post with ID #{params["id"]} Not Found"
+      flash["warning"] = "Post with ID #{params["id"]} Not Found"
       redirect "/posts"
     end
   end
 
-  action Delete do
+  def delete
     if post = Post.find params["id"]
       post.destroy
     else
-      context.flash["warning"] = "Post with ID #{params["id"]} Not Found"
+      flash["warning"] = "Post with ID #{params["id"]} Not Found"
     end
     redirect "/posts"
   end

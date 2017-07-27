@@ -1,69 +1,69 @@
 require "../models/user"
 
 class UserController < Kemalyst::Controller
-  action Index do
+  def index
     users = User.all
     html render("user/index.slang", "main.slang")
   end
 
-  action Show do
+  def show
     if user = User.find params["id"]
       html render("user/show.slang", "main.slang")
     else
-      context.flash["warning"] = "User with ID #{params["id"]} Not Found"
+      flash["warning"] = "User with ID #{params["id"]} Not Found"
       redirect "/users"
     end
   end
 
-  action New do
+  def new
     user = User.new
     html render("user/new.slang", "main.slang")
   end
 
-  action Create do
+  def create
     user = User.new(params.to_h.select(["name", "email"]))
     user.password = params["password"]
 
     if user.valid? && user.save
-      context.flash["success"] = "Created User successfully."
+      flash["success"] = "Created User successfully."
       redirect "/users"
     else
-      context.flash["danger"] = "Could not create User!"
+      flash["danger"] = "Could not create User!"
       html render("user/new.slang", "main.slang")
     end
   end
 
-  action Edit do
+  def edit
     if user = User.find params["id"]
       html render("user/edit.slang", "main.slang")
     else
-      context.flash["warning"] = "User with ID #{params["id"]} Not Found"
+      flash["warning"] = "User with ID #{params["id"]} Not Found"
       redirect "/users"
     end
   end
 
-  action Update do
+  def update
     if user = User.find(params["id"])
       user.set_attributes(params.to_h.select(["name", "email"]))
       user.password = params["password"]
       if user.valid? && user.save
-        context.flash["success"] = "Updated User successfully."
+        flash["success"] = "Updated User successfully."
         redirect "/users"
       else
-        context.flash["danger"] = "Could not update User!"
+        flash["danger"] = "Could not update User!"
         html render("user/edit.slang", "main.slang")
       end
     else
-      context.flash["warning"] = "User with ID #{params["id"]} Not Found"
+      flash["warning"] = "User with ID #{params["id"]} Not Found"
       redirect "/users"
     end
   end
 
-  action delete do
+  def delete
     if user = User.find params["id"]
       user.destroy
     else
-      context.flash["warning"] = "User with ID #{params["id"]} Not Found"
+      flash["warning"] = "User with ID #{params["id"]} Not Found"
     end
     redirect "/users"
   end

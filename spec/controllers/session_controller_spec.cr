@@ -2,17 +2,17 @@ require "./spec_helper"
 
 describe SessionController do
 
-  describe SessionController::New do
+  describe "new" do
     it "renders the view" do
     end
   end
 
-  describe SessionController::Create do
+  describe "create" do
     it "renders the view" do
     end
   end
 
-  describe SessionController::Delete do
+  describe "delete" do
     it "renders the view" do
     end
   end

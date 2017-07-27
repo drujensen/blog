@@ -1,4 +1,4 @@
-require "../src/controllers/session_controller"
+require "../src/middleware/authenticate"
 
 Kemalyst::Application.config do |config|
   # Set the binding host ip address.  Defaults to "0.0.0.0"
@@ -31,14 +31,14 @@ Kemalyst::Application.config do |config|
   # file.
 
   config.handlers.clear
-  config.handlers << Crack::Handler::Logger.instance(config.logger)
-  config.handlers << Crack::Handler::Error.instance
-  config.handlers << Crack::Handler::Static.instance
-  config.handlers << Crack::Handler::Session.instance
-  config.handlers << Crack::Handler::Flash.instance
-  config.handlers << Crack::Handler::Params.instance
-  config.handlers << Crack::Handler::CSRF.instance
-  config.handlers << Crack::Handler::Method.instance
-  config.handlers << SessionController::Authenticate.instance
+  config.handlers << Kemalyst::Handler::Logger.instance(config.logger)
+  config.handlers << Kemalyst::Handler::Error.instance
+  config.handlers << Kemalyst::Handler::Static.instance
+  config.handlers << Kemalyst::Handler::Session.instance
+  config.handlers << Kemalyst::Handler::Flash.instance
+  config.handlers << Kemalyst::Handler::Params.instance
+  config.handlers << Kemalyst::Handler::CSRF.instance
+  config.handlers << Kemalyst::Handler::Method.instance
+  config.handlers << Authenticate.new
   config.handlers << Kemalyst::Handler::Router.instance
 end
